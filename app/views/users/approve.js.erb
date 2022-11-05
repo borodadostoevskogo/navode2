@@ -1,0 +1,16 @@
+var approveStatus = '<%= @status %>';
+var approveMessage = '<%= @message %>';
+var approveMessageBox = document.querySelector('#token-form .message')
+
+if (approveStatus == 'allgood') {
+  console.log(approveMessage)
+  location.reload()
+} else if (approveStatus == 'wrongcode') {
+  console.log(approveMessage)
+  messageBox.append(approveMessage)
+  messageBox.classList.add('-active')
+} else if (approveStatus == 'nouser') {
+  console.log(approveMessage)
+  messageBox.append(approveMessage)
+  messageBox.classList.add('-active')
+}

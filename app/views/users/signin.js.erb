@@ -1,0 +1,11 @@
+var signInStatus = '<%= @status %>';
+var signInMessageBox = document.querySelector('#signin-form .message')
+
+if (signInStatus == 'allgood') {
+  location.reload()
+} else {
+  signInMessageBox.classList.add('-active')
+  signInMessageBox.append('Пароль и логин не совпадают')
+}
+
+

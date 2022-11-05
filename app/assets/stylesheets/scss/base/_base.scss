@@ -1,0 +1,14 @@
+body {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+	font-family: 'Mont';
+  font-weight: normal;
+	font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+	body {
+		// padding-bottom: 128px;
+	}
+}

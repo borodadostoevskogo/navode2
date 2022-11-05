@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Navode</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="main-header">
+      <div class="main-container">
+
+        <div id="logo-container">
+          <a href="/">
+            <img src="/images/logo.svg" alt="">
+          </a>
+        </div>
+
+        <div id="search-container">
+          <div id="search-switcher">
+            <span class="carret"></span>
+            <div class="item -active">аренда</div>
+            <div class="item">продажа</div>
+            <div class="item">яхт-клубы</div>
+            <div class="item">сервис</div>
+          </div>
+          <div id="search-form" class="-unactive">
+            <div class="placeholder">Продажа, аренда, яхт-клубы, сервис</div>
+
+
+            <div class="search-variant -active">
+              <div class="input-container">
+                <div class="label">Категория</div>
+                <input type="text" placeholder="Что ищем?">
+              </div>
+              <div class="input-container">
+                <div class="label">Местоположение</div>
+                <input type="text" placeholder="Где ищем?">
+              </div>
+              <div class="input-container">
+                <div class="label">Период аренды</div>
+                <input type="text" placeholder="Когда нужно?">
+              </div>
+            </div>
+
+            <div id="search-button"><span>Найти</span><div class="icon"></div></div>
+          </div>
+        </div>
+
+        <div id="user-header">
+          <div class="button" id="add-item-button"><span>Создать обьявление</span></div>
+
+          <div class="header-button-container">
+            <div class="header-button -lang"></div>
+          </div>
+
+          <div class="header-button-container">
+            <div class="header-button -user <%= user_signed_in? ? 'user-options-trigger' : 'auth-form-trigger' %>"></div>
+          </div>
+        </div>
+
+        <div id="menu-trigger"></div>
+
+      </div>
+    </div>
+    <div id="header-bg"></div>
+    <div id="overlay"></div>
+    <div id="mobile-overlay">
+      <div class="close"></div>
+    </div>
+
+    <% if user_signed_in? %>
+    <div id="user-tooltip">
+      <div class="tooltip-container">
+        <a href="#" class="link -items"><div class="label">Мои объявления</div></a>
+        <a href="#" class="link -orders"><div class="label">Заказы</div></a>
+        <a href="#" class="link -liked"><div class="label">Избранное</div></a>
+        <a href="#" class="link -profile -margin"><div class="label">Профиль</div></a>
+        <a href="#" class="link -messages"><div class="label">Сообщения</div></a>
+        <a href="#" class="link -notifications"><div class="label">Уведомления</div></a>
+        <a href="#" class="link -settings -margin"><div class="label">Настройки</div></a>
+        <span class="link -logout logout-trigger"><div class="label">Выйти</div></span>
+      </div>
+    </div>
+    <% else %>
+    <div id="auth-tooltip" class="tooltip-wrapper">
+      <div class="tooltip-container">
+
+        <div class="tooltip-item -signin -active">
+          <div class="header-container">
+            <div class="header">Войти</div>
+            <div class="link" data-to="register">Создать аккаунт</div>
+          </div>
+          <form class="auth-form" id="signin-form">
+            <div class="input-container -email">
+              <input type="text" name="email" autocomplete="off" placeholder="Введите email" required>
+            </div>
+            <div class="input-container -password">
+              <input type="password" name="password" placeholder="Введите пароль" required>
+            </div>
+            <div class="message"></div>
+            <button>Войти</button>
+          </form>
+        </div>
+
+        <div class="tooltip-item -register">
+          <div class="header-container">
+            <div class="header">Создать аккаунт</div>
+            <div class="link" data-to="signin">Войти</div>
+          </div>
+          <form class="auth-form" id="register-form">
+            <div class="input-container -email">
+              <input type="text" name="email" autocomplete="off" placeholder="Введите email">
+            </div>
+            <div class="input-container -password">
+              <input type="password" name="password" placeholder="Введите пароль">
+            </div>
+            <div class="input-container -password">
+              <input type="password" name="password_confirm" placeholder="Повторите пароль">
+            </div>
+            <div class="input-container -phone">
+              <input type="text" autocomplete="off" name="phone" placeholder="Введите телефон">
+            </div>
+            <div class="message"></div>
+            <button>Продолжить</button>
+          </form>
+        </div>
+
+        <div class="tooltip-item -token">
+          <div class="header-container">
+            <div class="header">Введите код</div>
+            <div class="link" data-to="register">Назад</div>
+          </div>
+          <form class="auth-form" id="token-form">
+            <div class="input-container -password">
+              <input type="text" name="token" autocomplete="off" placeholder="Введите код" required>
+            </div>
+            <div class="message"></div>
+            <input type="hidden" name="phone" value="">
+            <button>Продолжить</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+    <% end %>
+
+
+    <div id="tapbar">
+      <div class="left-col">
+        <a href="/" class="tapbar-icon -active -search">
+          <div class="icon"></div>
+          <div class="label">Поиск</div>
+        </a>
+        <div class="tapbar-icon -profile <%= user_signed_in? ? 'user-options-trigger' : 'auth-form-trigger' %>">
+          <div class="icon"></div>
+          <div class="label">Профиль</div>
+        </div>
+        <a href="#" class="tapbar-icon -liked <%= user_signed_in? ? '' : 'auth-form-trigger' %>">
+          <div class="icon"></div>
+          <div class="label">Избранное</div>
+        </a>
+      </div>
+      <div class="right-col">
+        <a href="#" class="create-item">
+          <div class="label">Создать <br> обьявление</div>
+          <div class="icon"></div>
+        </a>
+      </div>
+    </div>
+
+
+    <%= yield %>
+  </body>
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+</html>
